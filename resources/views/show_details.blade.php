@@ -62,6 +62,35 @@
                             </td>
                         </tr>
                     </table>
+
+                    <!-- comments goes here -->
+                    <div style="margin-top: 2em;">
+                        <label>Existing Comments</label><br />
+                        @foreach($film->comments as $comment)
+                            <p> {{ $comment->comment }} </p>
+                            <label>- {{ $comment->name }}</label>
+                            <div class="pull-right">{{ $comment->date_created }}</div>
+
+                        @endforeach
+                    </div>
+
+
+                    <div style="margin-top:4em;">
+                     <label>Got a comment about the movie?</label>   
+                        <form method="POST" action="{{ route('savecomment') }}">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="film_id" value="{{ $film->id }}">
+                            <div class="form-group">
+                              <label for="name">Name</label>
+                              <input type="text" class="form-control" id="name" placeholder="Name goes here" name="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">Comment</label>
+                                <textarea class="form-control" rows="3" id="comment" name="comment" placeholder="Comment goes here"></textarea>
+                            </div>
+                            <button class="btn btn-success pull-right" type="submit">Save</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

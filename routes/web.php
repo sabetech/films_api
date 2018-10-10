@@ -25,3 +25,5 @@ Route::get('/', function(){
 });
 
 Route::resource('films', 'FilmController')->middleware('auth');
+
+Route::post('comment', 'CommentController@save')->name('savecomment')->middleware('auth');
