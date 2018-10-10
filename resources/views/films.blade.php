@@ -21,7 +21,7 @@
                       <tbody>
                           @foreach($films as $film)
                           <tr>
-                            <td>{{ $film->name }}</td>
+                            <td><a href="{{ url('films/'.$film->url_slug) }}"> {{ $film->name }} </a></td>
                             <td>{{ $film->description }}</td>
                             <td>{{ gmdate("Y-m-d", $film->release_date) }}</td>
                             <td>{{ $film->rating }}</td>

@@ -46,6 +46,9 @@ class FilmController extends Controller
         //save a film instance ...
         $path = $request->file('picture')->store('public/movie_photo');
 
+        //generate a url_slug ... 
+        $url_slug = str_slug($request->input('name') .' '.date("Y-m-d H-i-s")); //for unique slugs
+
         $film = Film::create([
                 'name' => $request->input('name'),
                 'description' => $request->input('descrpition'),
@@ -54,7 +57,9 @@ class FilmController extends Controller
                 'ticket_price' => $request->input('ticket_price'),
                 'country' => $request->input('country'),
                 'genre' => $request->input('genre'),
-                'photo' => $path
+                'photo' => $path,
+                'url_slug' => $url_slug
+
                     ]);
 
         //saved ...
@@ -87,7 +92,9 @@ class FilmController extends Controller
         //get film frm url_slug
         $film = Film::where('url_slug','=', $url_slug)->first();
 
-        return view('show_details');
+        return view('show_details')
+                ->with('film', $film);
+
     }
 
     /**
