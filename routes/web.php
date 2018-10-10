@@ -12,6 +12,7 @@
 */
 
 Route::get('/', function () {
+
     return view('welcome');
 });
 
@@ -23,4 +24,4 @@ Route::get('/', function(){
 	return redirect()->route('films.index');
 });
 
-Route::resource('films', 'FilmController');
+Route::resource('films', 'FilmController')->middleware('auth');

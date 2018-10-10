@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Film;
 
 class FilmController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      *
@@ -13,8 +16,12 @@ class FilmController extends Controller
      */
     public function index()
     {
-        //
-        return "welcome";
+        //list films here ...
+
+        $films = Film::paginate(1);
+
+        return view('films')
+            ->with('films', $films);
     }
 
     /**
@@ -24,7 +31,8 @@ class FilmController extends Controller
      */
     public function create()
     {
-        //
+        //return a form for user to fill to create a film ... 
+        return view('create');
     }
 
     /**
@@ -35,7 +43,37 @@ class FilmController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //save a film instance ...
+        $path = $request->file('picture')->store('public/movie_photo');
+
+        $film = Film::create([
+                'name' => $request->input('name'),
+                'description' => $request->input('descrpition'),
+                'release_date' => self::convertToUnixTimeStamp($request->input('release_date')),
+                'rating' => $request->input('rating'),
+                'ticket_price' => $request->input('ticket_price'),
+                'country' => $request->input('country'),
+                'genre' => $request->input('genre'),
+                'photo' => $path
+                    ]);
+
+        //saved ...
+
+        ///show currently  stored films ..
+
+        return redirect()->route('films.index');
+
+
+
+    }
+
+    public static function convertToUnixTimeStamp($dateString){
+        $_date = new \DateTime($dateString);
+        
+        $_date->format("U");
+        
+        return $_date->getTimestamp();
+        
     }
 
     /**
@@ -44,9 +82,12 @@ class FilmController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($url_slug)
     {
-        //
+        //get film frm url_slug
+        $film = Film::where('url_slug','=', $url_slug)->first();
+
+        return view('show_details');
     }
 
     /**
