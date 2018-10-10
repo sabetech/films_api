@@ -25,12 +25,12 @@
 					    <input type="text" class="form-control" id="name" placeholder="name goes here" name="name">
 					  </div>
 					  <div class="form-group">
-					    <label for="descrpition">Description</label>
-					    <textarea class="form-control" rows="3" id="descrpition" name="descrpition"></textarea>
+					    <label for="description">Description</label>
+					    <textarea class="form-control" rows="3" id="description" name="description"></textarea>
 					  </div>
 					  <div class="form-group">
-					    <label for="exampleInputFile">Release Date</label>
-					    <input type="date" class="form-control" id="exampleInputEmail1" placeholder="date" name="release_date">
+					    <label for="release_date">Release Date</label>
+					    <input type="date" class="form-control" id="release_date" placeholder="date" name="release_date">
 					    
 					  </div>
 					  

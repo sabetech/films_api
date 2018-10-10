@@ -52,7 +52,7 @@ class FilmController extends Controller
             'ticket_price' => 'required',
             'country' => 'required',
             'genre' => 'required',
-            'movie_photo' => 'required'
+            'picture' => 'required'
         ]);
 
 
@@ -64,7 +64,7 @@ class FilmController extends Controller
 
         $film = Film::create([
                 'name' => $request->input('name'),
-                'description' => $request->input('descrpition'),
+                'description' => $request->input('description'),
                 'release_date' => self::convertToUnixTimeStamp($request->input('release_date')),
                 'rating' => $request->input('rating'),
                 'ticket_price' => $request->input('ticket_price'),
